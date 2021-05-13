@@ -12,6 +12,11 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    const handleDetailsView = (id) => {
+        history.push(`/details/${id}`)
+        dispatch({ type: 'SET_MOVIE_ID', payload: id })
+    }
+
     return (
         <main>
             <h1>MovieList</h1>
@@ -23,7 +28,7 @@ function MovieList() {
                                 <img
                                     src={movie.poster}
                                     alt={movie.title}
-                                    onClick={() => history.push(`/details/${movie.id}`)}
+                                    onClick={() => handleDetailsView(movie.id)}
                                 />
                         </div>
                     );
