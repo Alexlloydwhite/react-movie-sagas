@@ -5,3 +5,7 @@
 .moviecard {
    margin: 10px;
 }
+
+.movie-img {
+    cursor: pointer;
+}

@@ -31,6 +31,7 @@ function MovieList() {
                                 <img
                                     src={movie.poster}
                                     alt={movie.title}
+                                    className="movie-img"
                                     //  on click of movie poster img fire function to hold ID in redux
                                     onClick={() => handleDetailsView(movie.id)}
                                 />
