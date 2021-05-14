@@ -2,3 +2,6 @@
     display : flex;
     flex-wrap: wrap;
 }
+.moviecard {
+   margin: 10px;
+}

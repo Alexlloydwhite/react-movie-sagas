@@ -6,7 +6,7 @@ const MovieDetail = () => {
     const history = useHistory();
 
     return (
-        <div>
+        <div className="moviecard">
             {movieClickedDetail.map(movie => {
                 return <h1 key={movie.id}>{movie.description}</h1>
             })}
