@@ -1,18 +1,22 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddMovieForm = () => {
     const [movieTitle, setMovieTitle] = useState('');
     const [movieUrl, setMovieUrl] = useState('');
     const [movieDescription, setMovieDescription] = useState('');
     const [genre, setGenre] = useState('Genre 1')
-
+    const dispatch = useDispatch();
     const genres = useSelector(store => store.genres);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('clicked submit form');
     }
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GENRE' })
+    }, [])
 
     return (
         <div>
