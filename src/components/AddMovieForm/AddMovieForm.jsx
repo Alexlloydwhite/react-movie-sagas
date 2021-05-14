@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const AddMovieForm = () => {
     const [movieTitle, setMovieTitle] = useState('');
     const [movieUrl, setMovieUrl] = useState('');
     const [movieDescription, setMovieDescription] = useState('');
     const [genre, setGenre] = useState('Genre 1')
+
+    const genres = useSelector(store => store.genres);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,6 +16,7 @@ const AddMovieForm = () => {
 
     return (
         <div>
+            {JSON.stringify(genres)}
             <h1>Add a New Movie!</h1>
             <form onSubmit={handleSubmit}>
                 <input
