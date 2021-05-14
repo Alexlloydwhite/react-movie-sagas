@@ -1,5 +1,4 @@
 import {HashRouter as Router, Route } from 'react-router-dom';
-import './App.css';
 import Header from './Header';
 import MovieList from '../MovieList/MovieList';
 import MovieDetail from '../MovieDetail/MovieDetail';
