@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const AddMovieForm = () => {
     const [movieTitle, setMovieTitle] = useState('');
     const [movieUrl, setMovieUrl] = useState('');
     const [movieDescription, setMovieDescription] = useState('');
-    const [genre, setGenre] = useState('')
+    const [genre, setGenre] = useState('');
+    const [genreId, setGenreId] = useState('');
     const dispatch = useDispatch();
+    const history = useHistory();
     // array of genres from the store
     const genres = useSelector(store => store.genres);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('clicked submit form');
+        console.log(genre);
+        dispatch({ type: 'POST_MOVIE', title: movieTitle, poster: movieUrl, description: movieDescription, genre_id: genreId })
     }
 
     useEffect(() => {
@@ -22,8 +27,9 @@ const AddMovieForm = () => {
     return (
         <div>
             <h1>Add a New Movie!</h1>
+            {JSON.stringify(genreId)}
             {/* form for submitting new movie */}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="movieform">
                 {/* input takes title */}
                 <input
                     value={movieTitle}
@@ -44,14 +50,17 @@ const AddMovieForm = () => {
                 />
                 {/* selector for genre */}
                 <select
-                    onChange={(e) => setGenre(e.target.value)}
+                    form="movieform"
+                    onChange={(e) => setGenreId(e.target.value)}
                 >
                     {/* maps over array of genres, displays each as an option! */}
                     {genres.map(genre => {
-                        return <option key={genre.id}>{genre.name}</option>
+                        return <option key={genre.id} value={genre.id}>{genre.name}</option>
                     })}
                 </select>
-                <button type="submit">Submit</button>
+                <br />
+                <button onClick={() => history.push('/')}>Cancel</button>
+                <button type="submit">Save</button>
             </form>
         </div>
     );
