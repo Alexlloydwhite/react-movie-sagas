@@ -35,7 +35,12 @@ function MovieList() {
 
     return (
         <Container>
-            <Typography variant="h2">Movie List</Typography>
+            <Typography 
+                variant="h2"
+                align="center"
+            >
+                Movie List
+        </Typography>
             <br />
             <Grid container spacing={5}>
                 {movies.map(movie => {

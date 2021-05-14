@@ -1,6 +1,29 @@
+// IMPORTS FOR REACT FRAMEWORKS!
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+// -------------------- MUI -----------------------
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    field: {
+        marginTop: 20,
+        marginBottom: 20,
+        display: 'block'
+    },
+    cancelBtn: {
+        marginRight: 5
+    }
+})
 
 const AddMovieForm = () => {
     const [movieTitle, setMovieTitle] = useState('');
@@ -10,6 +33,7 @@ const AddMovieForm = () => {
     const [genreId, setGenreId] = useState(1);
     const dispatch = useDispatch();
     const history = useHistory();
+    const classes = useStyles();
     // array of genres from the store
     const genres = useSelector(store => store.genres);
 
@@ -30,43 +54,80 @@ const AddMovieForm = () => {
     }, [])
 
     return (
-        <div>
-            <h1>Add a New Movie!</h1>
+        <Container>
+            <Typography 
+                variant="h4" 
+                gutterBottom
+                align="center"
+            >
+                Add a New Movie
+            </Typography>
             {/* form for submitting new movie */}
             <form onSubmit={handleSubmit} id="movieform">
-                {/* input takes title */}
-                <input
-                    value={movieTitle}
-                    placeholder="Movie Title"
-                    onChange={(e) => setMovieTitle(e.target.value)}
-                />
-                {/* input takes url */}
-                <input
-                    value={movieUrl}
-                    placeholder="Movie Url"
-                    onChange={(e) => setMovieUrl(e.target.value)}
-                />
-                {/* input takes description */}
-                <input
-                    value={movieDescription}
-                    placeholder="Movie Description"
-                    onChange={(e) => setMovieDescription(e.target.value)}
-                />
                 {/* selector for genre */}
-                <select
+                <InputLabel>Genre</InputLabel>
+                <Select
                     form="movieform"
                     onChange={(e) => setGenreId(e.target.value)}
+                    fullWidth
                 >
                     {/* maps over array of genres, displays each as an option! */}
                     {genres.map(genre => {
-                        return <option key={genre.id} value={genre.id}>{genre.name}</option>
+                        return <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>
                     })}
-                </select>
+                </Select>
+                {/* input takes title */}
+                <TextField
+                    value={movieTitle}
+                    label="Movie Title"
+                    className={classes.field}
+                    onChange={(e) => setMovieTitle(e.target.value)}
+                    variant="outlined"
+                    required
+                    fullWidth
+                />
+                {/* input takes url */}
+                <TextField
+                    value={movieUrl}
+                    label="Movie Url"
+                    className={classes.field}
+                    onChange={(e) => setMovieUrl(e.target.value)}
+                    variant="outlined"
+                    required
+                    fullWidth
+                />
+                {/* input takes description */}
+                <TextField
+                    value={movieDescription}
+                    label="Movie Description"
+                    multiline
+                    rows={5}
+                    fullWidth
+                    className={classes.field}
+                    onChange={(e) => setMovieDescription(e.target.value)}
+                    variant="outlined"
+                    required
+                />
                 <br />
-                <button onClick={() => history.push('/')}>Cancel</button>
-                <button type="submit">Save</button>
+                <div>
+                    <Button 
+                        className={classes.cancelBtn}
+                        onClick={() => history.push('/')}
+                        color="primary"
+                        variant="contained"
+                    >
+                        Cancel
+                </Button>
+                    <Button
+                        type="submit"
+                        color="primary"
+                        variant="contained"
+                    >
+                        Save
+                </Button>
+                </div>
             </form>
-        </div>
+        </Container>
     );
 }
 
