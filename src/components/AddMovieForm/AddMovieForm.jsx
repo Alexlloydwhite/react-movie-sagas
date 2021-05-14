@@ -7,7 +7,7 @@ const AddMovieForm = () => {
     const [movieUrl, setMovieUrl] = useState('');
     const [movieDescription, setMovieDescription] = useState('');
     const [genre, setGenre] = useState('');
-    const [genreId, setGenreId] = useState('');
+    const [genreId, setGenreId] = useState(1);
     const dispatch = useDispatch();
     const history = useHistory();
     // array of genres from the store
@@ -18,6 +18,11 @@ const AddMovieForm = () => {
         console.log('clicked submit form');
         console.log(genre);
         dispatch({ type: 'POST_MOVIE', title: movieTitle, poster: movieUrl, description: movieDescription, genre_id: genreId })
+        // after dispatch , clear state of inputs
+        setMovieTitle('');
+        setMovieUrl('');
+        setMovieDescription('');
+        setGenreId(1);
     }
 
     useEffect(() => {
@@ -27,7 +32,6 @@ const AddMovieForm = () => {
     return (
         <div>
             <h1>Add a New Movie!</h1>
-            {JSON.stringify(genreId)}
             {/* form for submitting new movie */}
             <form onSubmit={handleSubmit} id="movieform">
                 {/* input takes title */}
