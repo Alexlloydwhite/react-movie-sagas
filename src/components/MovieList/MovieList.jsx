@@ -13,7 +13,7 @@ function MovieList() {
     }, []);
 
     // Functions fires on click of img poster
-    // Grabs the movies ID and sends it to Redux
+    // Grabs the movies ID and sends it to store
     // We will use this to load the movies details
     const handleDetailsView = (id) => {
         history.push(`/details/${id}`)
