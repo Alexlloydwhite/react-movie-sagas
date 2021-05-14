@@ -6,6 +6,7 @@ const Header = () => {
         <nav>
             <h1>The Movies Saga!</h1>
             <button onClick={() => history.push('/')}>home</button>
+            <button onClick={() => history.push('/addmovie')}>Add New Movie</button>
         </nav>
     );
 }
