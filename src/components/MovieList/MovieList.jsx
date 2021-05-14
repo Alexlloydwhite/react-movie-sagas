@@ -15,10 +15,9 @@ function MovieList() {
     // Functions fires on click of img poster
     // Grabs the movies ID and sends it to Redux
     // We will use this to load the movies details
-    const handleDetailsView = (id, desc) => {
+    const handleDetailsView = (id) => {
         history.push(`/details/${id}`)
-        console.log(desc);
-        dispatch({ type: 'SET_CLICK_MOVIE', id, desc })
+        dispatch({ type: 'SET_MOVIE_CLICK', payload: id})
     }
 
     return (
@@ -33,7 +32,7 @@ function MovieList() {
                                     src={movie.poster}
                                     alt={movie.title}
                                     //  on click of movie poster img fire function to hold ID in redux
-                                    onClick={() => handleDetailsView(movie.id, movie.description)}
+                                    onClick={() => handleDetailsView(movie.id)}
                                 />
                         </div>
                     );
