@@ -26,7 +26,6 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }
-        
 }
 
 // Create sagaMiddleware
@@ -53,10 +52,10 @@ const genres = (state = [], action) => {
 }
 
 // Used to store the movie clicked
-const movieDetail = (state = 0, action) => {
-    switch(action.type) {
-        case 'SET_MOVIE_ID':
-            return action.payload;
+const movieId = (state = 0, action) => {
+    switch (action.type) {
+        case 'SET_CLICK_MOVIE':
+            return {id: action.id, desc: action.desc};
         default:
             return state;
 
@@ -68,7 +67,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        movieDetail
+        movieId
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -80,7 +79,7 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={storeInstance}>
-        <App />
+            <App />
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
