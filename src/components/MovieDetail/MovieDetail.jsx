@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { useParams } from 'react-router-dom';
 
 const MovieDetail = () => {
     const movieClickedDetail = useSelector(store => store.movieClicked);
@@ -10,6 +12,14 @@ const MovieDetail = () => {
         history.push('/')
         dispatch({ type: 'RESET_CLICK' });
     }
+
+    const params = useParams();
+    console.log(params);
+    console.log('page ID is:', params.id);
+
+    useEffect(() => {
+        dispatch({ type: 'SET_MOVIE_CLICK', payload: params.id })
+    }, [])
 
     return (
         <div className="moviecard">
