@@ -4,6 +4,7 @@ import Header from './Header';
 import MovieList from '../MovieList/MovieList';
 import MovieDetail from '../MovieDetail/MovieDetail';
 import AddMovieForm from '../AddMovieForm/AddMovieForm';
+import EditMovieForm from '../EditMovieForm/EditMovieForm';
 // -------------------- MUI -----------------------
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -34,6 +35,8 @@ function App() {
             <Route path='/details/:id' component={MovieDetail} />
             {/* Add Movie page */}
             <Route path="/addmovie" component={AddMovieForm} />
+            {/* edit movie page */}
+            <Route path="editmovie" component={EditMovieForm} />
           </div>
         </Router>
       </div>
