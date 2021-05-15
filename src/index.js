@@ -17,6 +17,7 @@ function* rootSaga() {
     yield takeEvery('SET_MOVIE_CLICK', getMovieById);
     yield takeEvery('FETCH_GENRE', getGenre);
     yield takeEvery('POST_MOVIE', postMovie);
+    yield takeEvery('EDIT_MOVIE', editMovie);
 }
 
 function* fetchAllMovies() {
@@ -58,6 +59,14 @@ function* postMovie(action) {
         yield axios.post('/api/movie', {title: action.title, poster: action.poster, description: action.description, genre_id: action.genre_id});
     } catch (error) {
         console.log('Error posting movie', error);
+    }
+}
+
+function* editMovie(action) {
+    try {
+        yield axios.put(`/api/movie/${action.id}`, {title: action.title , description: action.description});
+    } catch (error) {
+        console.log('put request failed:', error);
     }
 }
 

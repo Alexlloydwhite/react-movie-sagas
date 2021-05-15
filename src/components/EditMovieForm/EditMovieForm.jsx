@@ -12,6 +12,12 @@ const EditMovieForm = () => {
 
     const handleSubmit = () => {
         console.log('Clicked handle submit');
+        dispatch({ 
+            type: 'EDIT_MOVIE',
+            id: movie.id,
+            title: movie.title,
+            description: movie.description
+        })
     }
 
     const handleTitleChange = (e) => {
@@ -45,7 +51,12 @@ const EditMovieForm = () => {
                     />
                     <br />
                     <button onClick={() => history.push(`/details/${params.id}`)}>Cancel</button>
-                    <button type='submit' onClick={() => history.push(`/details/${params.id}`)}>Save</button>
+                    <button 
+                        type='submit' 
+                        // onClick={() => history.push(`/details/${params.id}`)}
+                    >
+                        Save
+                    </button>
                 </form>
             </div>
         </div>
