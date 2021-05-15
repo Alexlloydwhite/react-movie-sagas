@@ -27,6 +27,7 @@ const MovieDetail = () => {
                 return <h1 key={movie.id}>{movie.description}</h1>
             })}
             <button onClick={handleBackClick}>Back to List</button>
+            <button onClick={() => history.push('/editmovie')}>Edit Movie</button>
         </div>
     );
 }

@@ -36,7 +36,7 @@ function App() {
             {/* Add Movie page */}
             <Route path="/addmovie" component={AddMovieForm} />
             {/* edit movie page */}
-            <Route path="editmovie" component={EditMovieForm} />
+            <Route path="/editmovie" component={EditMovieForm} />
           </div>
         </Router>
       </div>
