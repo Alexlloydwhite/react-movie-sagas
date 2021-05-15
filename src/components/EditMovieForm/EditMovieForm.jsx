@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const EditMovieForm = () => {
     const dispatch = useDispatch();
     const params = useParams();
+    const history = useHistory();
 
     const movie = useSelector(store => store.movieEdit)
     console.log('movie to edit is:', movie);
-
-    useEffect(() => {
-        dispatch({ type: 'SET_MOVIE_CLICK', payload: params.id });
-    }, [])
 
     const handleSubmit = () => {
         console.log('Clicked handle submit');
@@ -46,6 +43,9 @@ const EditMovieForm = () => {
                         placeholder="Description"
                         onChange={(e) => handleDescChange(e)}
                     />
+                    <br />
+                    <button onClick={() => history.push(`/details/${params.id}`)}>Cancel</button>
+                    <button type='submit' onClick={() => history.push(`/details/${params.id}`)}>Save</button>
                 </form>
             </div>
         </div>
