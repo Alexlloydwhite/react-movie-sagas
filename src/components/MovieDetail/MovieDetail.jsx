@@ -14,8 +14,9 @@ const MovieDetail = () => {
         dispatch({ type: 'RESET_CLICK' });
     }
 
-    const handleEditClick = (id) => {
-        history.push(`/editmovie/${id}`)
+    const handleEditClick = (movie) => {
+        history.push(`/editmovie/${movie.id}`)
+        dispatch({ type: 'SET_MOVIE_EDIT', id: movie.id, title: movie.title, description: movie.description })
     }
 
     useEffect(() => {
@@ -25,10 +26,12 @@ const MovieDetail = () => {
     return (
         <div className="moviecard">
             {movieClickedDetail.map(movie => {
-                return <h1 key={movie.id}>{movie.description}</h1>
+                return <div>
+                    <h1 key={movie.id}>{movie.description}</h1>
+                    <button onClick={() => handleEditClick(movie)}>Edit Movie</button>
+                </div>
             })}
             <button onClick={handleBackClick}>Back to List</button>
-            <button onClick={() => handleEditClick(params.id)}>Edit Movie</button>
         </div>
     );
 }

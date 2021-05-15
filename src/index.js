@@ -93,16 +93,30 @@ const movieClicked = (state = [], action) => {
             return state;
         default:
             return state;
-
     }
 }
 
+const movieEdit = (state={}, action) => {
+    console.log('IN movieEdit reducer action is:', action);
+    switch(action.type) {
+        case 'SET_MOVIE_EDIT':
+            return { id: action.id, title: action.title, description: action.description };
+        case 'EDIT_ONCHANGE':
+            return {
+                ...state,
+                [action.payload.property]: action.payload.value
+            }
+        default:
+            return state;
+    }
+}
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        movieClicked
+        movieClicked,
+        movieEdit
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
