@@ -58,7 +58,6 @@ const MovieDetail = () => {
                     >
                         {movie.title}
                     </Typography>
-                    <Typography align="center" gutterBottom>Genre Catagories</Typography>
                     {genres.map(genre => {
                         return <Typography 
                                     variant="h5" 

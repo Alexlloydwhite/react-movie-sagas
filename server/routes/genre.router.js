@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
   // sql query to get all genres for a movie by ID
   const sqlQuery = `SELECT m.title, g.name FROM movies m
                       JOIN movies_genres mg ON m.id = mg.movie_id
-                      JOIN genres g ON g.id = mg.id
+                      JOIN genres g ON mg.genre_id = g.id
                       WHERE m.id=$1;`
   pool.query(sqlQuery, [movieId])
     .then(result => {
