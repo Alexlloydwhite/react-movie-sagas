@@ -17,10 +17,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  console.log(`IN get genre by ID router: ID is ${req.params.id}`);
   // grab id from request params
   let movieId = req.params.id;
   // sql query to get all genres for a movie by ID
-  const sqlQuery = `SELECT m.title as "movie_title", g.name as "genre_name" FROM movies m
+  const sqlQuery = `SELECT m.title, g.name FROM movies m
                       JOIN movies_genres mg ON m.id = mg.movie_id
                       JOIN genres g ON g.id = mg.id
                       WHERE m.id=$1;`

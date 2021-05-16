@@ -38,7 +38,8 @@ function MovieList() {
     // We will use this to load the movies details
     const handleDetailsView = (id) => {
         history.push(`/details/${id}`)
-        dispatch({ type: 'SET_MOVIE_CLICK', payload: id })
+        dispatch({ type: 'SET_MOVIE_CLICK', payload: id });
+        dispatch({ type: 'FETCH_GENRE_BY_ID', id: id });
     }
     // state for search input
     const [search, setSearch] = useState('');

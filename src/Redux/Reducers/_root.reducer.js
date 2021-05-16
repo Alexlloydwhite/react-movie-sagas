@@ -4,6 +4,7 @@ import genres from './genres.reducer';
 import movieClicked from './movieClicked.reducer';
 import movieEdit from './movieEdit.reducer';
 import movieSearched from './search.reducer';
+import genreById from './genreById.reducer';
 
 const rootReducer = combineReducers({
         movies,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
         movieClicked,
         movieEdit,
         movieSearched,
+        genreById,
 })
 
 export default rootReducer;

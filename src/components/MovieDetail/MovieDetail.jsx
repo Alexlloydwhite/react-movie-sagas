@@ -26,11 +26,13 @@ const MovieDetail = () => {
     const classes = useStyles();
     // reducer holds the movie clicked
     const movieClickedDetail = useSelector(store => store.movieClicked);
+    const genres = useSelector(store => store.genreById)
     // on click page, to use back to home page view
     const handleBackClick = () => {
         history.push('/')
         // Resets state of movie clicked
         dispatch({ type: 'RESET_CLICK' });
+        dispatch({ type: 'RESET_GENRE' })
     }
     // handle click of edit btn
     const handleEditClick = (movie) => {
@@ -49,22 +51,33 @@ const MovieDetail = () => {
             {movieClickedDetail.map(movie => {
                 return <div key={movie.id}>
                     {/* Movie Details */}
-                    <Typography 
+                    <Typography
                         variant="h2"
                         align="center"
                         gutterBottom
                     >
                         {movie.title}
                     </Typography>
+                    <Typography align="center" gutterBottom>Genre Catagories</Typography>
+                    {genres.map(genre => {
+                        return <Typography 
+                                    variant="h5" 
+                                    align="center" 
+                                    gutterBottom
+                                    color="textSecondary"
+                                >
+                                    {genre.name}
+                                </Typography>
+                    })}
                     {/* Movie Poster */}
-                    <img 
+                    <img
                         className={classes.poster}
-                        src={movie.poster} 
+                        src={movie.poster}
                         align="left"
                     />
                     <Typography variant="h4" gutterBottom>{movie.description}</Typography>
                     {/* Back Btn */}
-                    <Button 
+                    <Button
                         color="primary"
                         variant="contained"
                         className={classes.cancelBtn}
@@ -73,7 +86,7 @@ const MovieDetail = () => {
                         Back to List
                     </Button>
                     {/* Edit Button */}
-                    <Button 
+                    <Button
                         color="primary"
                         variant="contained"
                         onClick={() => handleEditClick(movie)}
