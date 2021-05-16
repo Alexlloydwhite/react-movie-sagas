@@ -3,11 +3,27 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useParams } from 'react-router-dom';
+// -------------------- MUI -----------------------
+import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core'
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core';
+
+// theme for inputs
+const useStyles = makeStyles({
+    cancelBtn: {
+        marginRight: 5
+    },
+    poster: {
+        marginRight: 20
+    }
+})
 
 const MovieDetail = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const params = useParams();
+    const classes = useStyles();
     // reducer holds the movie clicked
     const movieClickedDetail = useSelector(store => store.movieClicked);
     // on click page, to use back to home page view
@@ -28,19 +44,45 @@ const MovieDetail = () => {
         dispatch({ type: 'SET_MOVIE_CLICK', payload: params.id })
     }, [])
     return (
-        <div className="moviecard">
+        <Container>
             {/* Need to make this look cool... Movie Details go here*/}
             {movieClickedDetail.map(movie => {
                 return <div key={movie.id}>
                     {/* Movie Details */}
-                    <h1 key={movie.id}>{movie.description}</h1>
+                    <Typography 
+                        variant="h2"
+                        align="center"
+                        gutterBottom
+                    >
+                        {movie.title}
+                    </Typography>
+                    <img 
+                        className={classes.poster}
+                        src={movie.poster} 
+                        align="left"
+                    />
+                    <Typography variant="h4" gutterBottom>{movie.description}</Typography>
+                    {/* Back Btn */}
+                    <Button 
+                        color="primary"
+                        variant="contained"
+                        className={classes.cancelBtn}
+                        onClick={handleBackClick}
+                    >
+                        Back to List
+                    </Button>
                     {/* Edit Button */}
-                    <button onClick={() => handleEditClick(movie)}>Edit Movie</button>
+                    <Button 
+                        color="primary"
+                        variant="contained"
+                        onClick={() => handleEditClick(movie)}
+                    >
+                        Edit Movie
+                    </Button>
+
                 </div>
             })}
-            {/* Back Btn */}
-            <button onClick={handleBackClick}>Back to List</button>
-        </div>
+        </Container>
     );
 }
 

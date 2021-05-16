@@ -2,7 +2,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 // -------------------- MUI -----------------------
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -17,6 +16,9 @@ const useStyles = makeStyles({
     },
     cancelBtn: {
         marginRight: 5
+    },
+    form: {
+        marginTop: 100
     }
 })
 
@@ -57,7 +59,10 @@ const EditMovieForm = () => {
     return (
         <Container>
             {/* Form to Edit Movie */}
-            <form onSubmit={handleSubmit}>
+            <form 
+                className={classes.form} 
+                onSubmit={handleSubmit}
+            >
                 {/* Input holds movie to edit title */}
                 <TextField
                     label="Edit Movie Title"
