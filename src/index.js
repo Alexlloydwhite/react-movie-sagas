@@ -10,129 +10,22 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-
-// Create the rootSaga generator function
-function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('SET_MOVIE_CLICK', getMovieById);
-    yield takeEvery('FETCH_GENRE', getGenre);
-    yield takeEvery('POST_MOVIE', postMovie);
-    yield takeEvery('EDIT_MOVIE', editMovie);
-}
-
-function* fetchAllMovies() {
-    // get all movies from the DB
-    try {
-        const clickedMovie = yield axios.get('/api/movie');
-        console.log('IN fetchAllMovies - response from get request:', clickedMovie.data);
-        yield put({ type: 'SET_MOVIES', payload: clickedMovie.data });
-
-    } catch {
-        console.log('get all error');
-    }
-}
-
-function* getMovieById(action) {
-    // get movie based on ID of movie clicked
-    try {
-        const movieClick = yield axios.get(`/api/movie/${action.payload}`)
-        console.log(`IN getMovieById - response from GET request:`, movieClick.data);
-        // dispatch to reducer to hold state of movie clicked
-        yield put({ type: 'SET_CLICK', payload: movieClick.data })
-    } catch (error) {
-        console.log('Error in getMovieById:', error);
-    }
-}
-
-function* getGenre() {
-    try {
-        const genre = yield axios.get('/api/genre');
-        console.log('IN getGenre - response from GET request:', genre.data);
-        yield put({ type: 'SET_GENRE', payload: genre.data })
-    } catch {
-        console.log('error in getGenre:');
-    }
-}
-
-function* postMovie(action) {
-    try {
-        yield axios.post('/api/movie', {title: action.title, poster: action.poster, description: action.description, genre_id: action.genre_id});
-    } catch (error) {
-        console.log('Error posting movie', error);
-    }
-}
-
-function* editMovie(action) {
-    try {
-        yield axios.put(`/api/movie/${action.id}`, {title: action.title , description: action.description});
-    } catch (error) {
-        console.log('put request failed:', error);
-    }
-}
+// Redux imports
+import rootReducer from './Redux/Reducers/_root.reducer';
+import rootSaga from './Redux/Sagas/_root.saga';
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to store movies returned from the server
-const movies = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_MOVIES':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-// Used to store the movie genres
-const genres = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_GENRE':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-// Used to store the movie clicked
-const movieClicked = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_CLICK':
-            return action.payload;
-        case 'RESET_CLICK':
-            return state;
-        default:
-            return state;
-    }
-}
-
-const movieEdit = (state={}, action) => {
-    console.log('IN movieEdit reducer action is:', action);
-    switch(action.type) {
-        case 'SET_MOVIE_EDIT':
-            return { id: action.id, title: action.title, description: action.description };
-        case 'EDIT_ONCHANGE':
-            return {
-                ...state,
-                [action.payload.property]: action.payload.value
-            }
-        default:
-            return state;
-    }
-}
 // Create one store that all components can use
 const storeInstance = createStore(
-    combineReducers({
-        movies,
-        genres,
-        movieClicked,
-        movieEdit
-    }),
+    rootReducer,
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
 
 // Pass rootSaga into our sagaMiddleware
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run( rootSaga );
 
 ReactDOM.render(
     <React.StrictMode>
