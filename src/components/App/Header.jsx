@@ -28,6 +28,8 @@ const Header = () => {
                     <Button onClick={() => history.push('/')}>home</Button>
                     {/* Add New Movie Btn, directs to form page */}
                     <Button onClick={() => history.push('/addmovie')}>Add New Movie</Button>
+                    {/* Admin Login Btn, directs to admin login */}
+                    <Button onClick={() => history.push('/admin')}>Admin Login</Button>
                 </div>
             </Toolbar>
         </AppBar>
