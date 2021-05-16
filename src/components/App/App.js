@@ -40,7 +40,7 @@ function App() {
             {/* Edit Page */}
             <Route path="/editmovie/:id" component={EditMovieForm} />
             {/* Admin Page */}
-            <Route path="/admin" component={Admin} />
+            <Route path="/admin" exact component={Admin} />
           </div>
         </Router>
       </div>

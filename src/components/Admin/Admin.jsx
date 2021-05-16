@@ -1,6 +1,6 @@
 const Admin = () => {
     return (  
-        <h3>Admin Page Under Construction</h3>
+        <h3>Admin Page Under</h3>
     );
 }
  
