@@ -17,6 +17,7 @@ const EditMovieForm = () => {
             title: movie.title,
             description: movie.description
         })
+        history.push(`/details/${params.id}`);
     }
 
     const handleTitleChange = (e) => {
@@ -50,12 +51,7 @@ const EditMovieForm = () => {
                     />
                     <br />
                     <button onClick={() => history.push(`/details/${params.id}`)}>Cancel</button>
-                    <button 
-                        type='submit' 
-                        // onClick={() => history.push(`/details/${params.id}`)}
-                    >
-                        Save
-                    </button>
+                    <button type='submit'>Save</button>
                 </form>
             </div>
         </div>
