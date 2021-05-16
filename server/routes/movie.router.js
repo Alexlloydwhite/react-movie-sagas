@@ -3,7 +3,6 @@ const router = express.Router();
 const pool = require('../modules/pool')
 
 router.get('/', (req, res) => {
-
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
   pool.query(query)
     .then(result => {
@@ -29,6 +28,22 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(`error making SQL query ${sqlQuery}:`, err);
+      res.sendStatus(500);
+    })
+});
+
+router.put('/:id', (req,res) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const desc = req.body.description;
+  console.log(`IN edit movie by ID. ID is ${id}`);
+  let sqlQuery = `UPDATE "movies" SET title=$2, description=$3 WHERE id=$1;`;
+  pool.query(sqlQuery, [id, title, desc])
+    .then(response => {
+      res.send(response.rows)
+    }) 
+    .catch(err => {
+      console.log(`error making put request for ${id}: ${err}`);
       res.sendStatus(500);
     })
 })
