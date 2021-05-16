@@ -54,7 +54,7 @@ function MovieList() {
     useEffect(() => {
         // on page load - pull movie array from DB
         dispatch({ type: 'FETCH_MOVIES' });
-        // Watch search bar and toggle search
+        // Watch search bar and toggle search results
         if (search) {
             setToggleSearch(true);
         } else {
