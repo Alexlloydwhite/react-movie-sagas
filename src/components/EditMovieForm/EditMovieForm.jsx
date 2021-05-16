@@ -1,11 +1,30 @@
 // IMPORTS FOR REACT FRAMEWORKS!
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+// -------------------- MUI -----------------------
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core';
+
+// theme for inputs
+const useStyles = makeStyles({
+    field: {
+        marginTop: 20,
+        marginBottom: 20,
+        display: 'block'
+    },
+    cancelBtn: {
+        marginRight: 5
+    }
+})
 
 const EditMovieForm = () => {
     const dispatch = useDispatch();
     const params = useParams();
     const history = useHistory();
+    const classes = useStyles();
     // grabs the movie details from store
     const movie = useSelector(store => store.movieEdit)
     // function to handle form submit
@@ -36,30 +55,48 @@ const EditMovieForm = () => {
         });
     }
     return (
-        <div>
-            <div>
-                {/* Form to Edit Movie */}
-                <form onSubmit={handleSubmit}>
-                    {/* Input holds movie to edit title */}
-                    <input
-                        value={movie.title}
-                        placeholder="Title"
-                        onChange={(e) => handleTitleChange(e)}
-                    />
-                    {/* input holds movie to edit description */}
-                    <input
-                        value={movie.description}
-                        placeholder="Description"
-                        onChange={(e) => handleDescChange(e)}
-                    />
-                    <br />
-                    {/* Cancel Btn takes you back to details view */}
-                    <button onClick={() => history.push(`/details/${params.id}`)}>Cancel</button>
-                    {/* Save Btn- submits form */}
-                    <button type='submit'>Save</button>
-                </form>
-            </div>
-        </div>
+        <Container>
+            {/* Form to Edit Movie */}
+            <form onSubmit={handleSubmit}>
+                {/* Input holds movie to edit title */}
+                <TextField
+                    label="Edit Movie Title"
+                    className={classes.field}
+                    variant="outlined"
+                    fullWidth
+                    value={movie.title}
+                    onChange={(e) => handleTitleChange(e)}
+                />
+                {/* input holds movie to edit description */}
+                <TextField
+                    value={movie.description}
+                    label="Edit Movie Description"
+                    multiline
+                    rows={5}
+                    fullWidth
+                    className={classes.field}
+                    variant="outlined"
+                    onChange={(e) => handleDescChange(e)}
+                />
+                {/* Cancel Btn takes you back to details view */}
+                <Button 
+                    onClick={() => history.push(`/details/${params.id}`)}
+                    className={classes.cancelBtn}
+                    color="primary"
+                    variant="contained"
+                >
+                    Cancel
+                </Button>
+                {/* Save Btn- submits form */}
+                <Button 
+                    type='submit'
+                    color="primary"
+                    variant="contained"
+                >
+                    Save
+                </Button>
+            </form>
+        </Container>
     );
 }
 
