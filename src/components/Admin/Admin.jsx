@@ -34,7 +34,10 @@ const Admin = () => {
     return (
         <Container align="center">
             {toggleForm ?
-                <h5>Form for genre acqui</h5>
+                <div>
+                    <img src="/images/website-is-under-construction.jpeg" />
+                    <Typography variant="h2" color="error">This Page is UNDER CONSTRUCTION ... Check Back Soon !</Typography>
+                </div>
                 :
                 <form onSubmit={handleSubmit}>
                     <Typography
