@@ -41,7 +41,8 @@ const MovieDetail = () => {
     }
     // this hook allows to page view to persist thru refresh
     useEffect(() => {
-        dispatch({ type: 'SET_MOVIE_CLICK', payload: params.id })
+        dispatch({ type: 'SET_MOVIE_CLICK', payload: params.id });
+        dispatch({ type: 'FETCH_GENRE_BY_ID', id: params.id })
     }, [])
     return (
         <Container>
