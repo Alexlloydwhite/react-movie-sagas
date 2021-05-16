@@ -5,6 +5,7 @@ import MovieList from '../MovieList/MovieList';
 import MovieDetail from '../MovieDetail/MovieDetail';
 import AddMovieForm from '../AddMovieForm/AddMovieForm';
 import EditMovieForm from '../EditMovieForm/EditMovieForm';
+import Admin from '../Admin/Admin';
 // -------------------- MUI -----------------------
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -38,6 +39,8 @@ function App() {
             <Route path="/addmovie" component={AddMovieForm} />
             {/* Edit Page */}
             <Route path="/editmovie/:id" component={EditMovieForm} />
+            {/* Admin Page */}
+            <Route path="/admin" component={Admin} />
           </div>
         </Router>
       </div>
