@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import Search from '../Search/Search';
 // -------------------- MUI -----------------------
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -34,17 +35,20 @@ function MovieList() {
     }, []);
 
     return (
-        <Container>
+        <Container align="center">
             {/* Page view info text */}
-            <Typography 
+            <Typography
                 variant="h2"
                 align="center"
             >
                 Movie List
         </Typography>
+            {/* Search Bar */}
+            <br />
+            <Search />
             <br />
             {/* Grid holds movie cards */}
-            <Grid container spacing={5}>
+            <Grid container align="center">
                 {movies.map(movie => {
                     return (
                         <Card key={movie.id} elevation={0} className={classes.root}>

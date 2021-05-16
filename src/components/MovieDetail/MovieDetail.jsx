@@ -45,7 +45,6 @@ const MovieDetail = () => {
     }, [])
     return (
         <Container>
-            {/* Need to make this look cool... Movie Details go here*/}
             {movieClickedDetail.map(movie => {
                 return <div key={movie.id}>
                     {/* Movie Details */}
@@ -56,6 +55,7 @@ const MovieDetail = () => {
                     >
                         {movie.title}
                     </Typography>
+                    {/* Movie Poster */}
                     <img 
                         className={classes.poster}
                         src={movie.poster} 
