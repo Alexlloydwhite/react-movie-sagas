@@ -8,6 +8,7 @@ import EditMovieForm from '../EditMovieForm/EditMovieForm';
 // -------------------- MUI -----------------------
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
+// custom "movie theatre" theme!
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -23,19 +24,19 @@ const theme = createMuiTheme({
 
 function App() {
   return (
+    // theme wraps the app!
     <ThemeProvider theme={theme}>
       <div className="App">
         <Router>
           <Header />
           <div style={{ marginTop: 80 }}>
-            <Route path="/" exact>
-              <MovieList />
-            </Route>
+            {/* Home Page */}
+            <Route path="/" exact component={MovieList} />
             {/* Details page */}
             <Route path='/details/:id' component={MovieDetail} />
             {/* Add Movie page */}
             <Route path="/addmovie" component={AddMovieForm} />
-            {/* edit movie page */}
+            {/* Edit Page */}
             <Route path="/editmovie/:id" component={EditMovieForm} />
           </div>
         </Router>

@@ -6,14 +6,13 @@ import { useHistory } from "react-router";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core';
 
+// theme for inputs
 const useStyles = makeStyles({
     field: {
         marginTop: 20,
@@ -26,11 +25,13 @@ const useStyles = makeStyles({
 })
 
 const AddMovieForm = () => {
+    // ---- local state -----
     const [movieTitle, setMovieTitle] = useState('');
     const [movieUrl, setMovieUrl] = useState('');
     const [movieDescription, setMovieDescription] = useState('');
     const [genre, setGenre] = useState('');
     const [genreId, setGenreId] = useState(1);
+
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
@@ -39,8 +40,7 @@ const AddMovieForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('clicked submit form');
-        console.log(genre);
+        // dispatch to store to post movie data to db
         dispatch({ type: 'POST_MOVIE', title: movieTitle, poster: movieUrl, description: movieDescription, genre_id: genreId })
         // after dispatch , clear state of inputs
         setMovieTitle('');
@@ -50,6 +50,7 @@ const AddMovieForm = () => {
     }
 
     useEffect(() => {
+        // hook to grab genres from db
         dispatch({ type: 'FETCH_GENRE' })
     }, [])
 
@@ -110,6 +111,7 @@ const AddMovieForm = () => {
                 />
                 <br />
                 <div>
+                    {/* Cancel Btn, takes user to home page */}
                     <Button 
                         className={classes.cancelBtn}
                         onClick={() => history.push('/')}
@@ -118,6 +120,7 @@ const AddMovieForm = () => {
                     >
                         Cancel
                 </Button>
+                    {/* Save Btn, submits form */}
                     <Button
                         type="submit"
                         color="primary"

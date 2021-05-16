@@ -19,8 +19,8 @@ function MovieList() {
     const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles();
+    // movie list
     const movies = useSelector(store => store.movies);
-
     // Functions fires on click of img poster
     // Grabs the movies ID and sends it to store
     // We will use this to load the movies details
@@ -28,13 +28,14 @@ function MovieList() {
         history.push(`/details/${id}`)
         dispatch({ type: 'SET_MOVIE_CLICK', payload: id })
     }
-
+    // grabs movie data from store
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
     return (
         <Container>
+            {/* Page view info text */}
             <Typography 
                 variant="h2"
                 align="center"
@@ -42,11 +43,14 @@ function MovieList() {
                 Movie List
         </Typography>
             <br />
+            {/* Grid holds movie cards */}
             <Grid container spacing={5}>
                 {movies.map(movie => {
                     return (
                         <Card key={movie.id} elevation={0} className={classes.root}>
+                            {/* Movie Card! */}
                             <CardContent>
+                                {/* Movie Poster */}
                                 <img
                                     src={movie.poster}
                                     alt={movie.title}
