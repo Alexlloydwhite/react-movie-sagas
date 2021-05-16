@@ -14,6 +14,7 @@ router.get('/:search', (req,res) => {
         })
         .catch(err => {
             console.log(`IN search router, error making search ${search}: ${err}`);
+            res.sendStatus(500);
         })
 })
 
