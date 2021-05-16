@@ -40,17 +40,21 @@ function MovieList() {
         history.push(`/details/${id}`)
         dispatch({ type: 'SET_MOVIE_CLICK', payload: id })
     }
+    // state for search input
     const [search, setSearch] = useState('');
+    // state for toggling search && conditional rendering
     const [toggleSearch, setToggleSearch] = useState(false)
-
+    // Function to send search input => server => db => client. 
+    // This will continue to fire a dispatch AS the user changes search input.
     const handleSearch = (e) => {
         console.log('IN handleSearch - Search for:', e.target.value);
         setSearch(e.target.value);
         dispatch({ type: 'SET_SEARCH', search: e.target.value });
     }
-
     useEffect(() => {
+        // on page load - pull movie array from DB
         dispatch({ type: 'FETCH_MOVIES' });
+        // Watch search bar and toggle search results
         if (search) {
             setToggleSearch(true);
         } else {
@@ -87,7 +91,9 @@ function MovieList() {
             </Container>
             {/* Grid holds movie cards */}
             <Grid container align="center">
+                {/* Conditional rending */}
                 {toggleSearch ?
+                    // IF search is toggled, display search results
                     searchResults.map(movie => {
                         return (
                             <Card key={movie.id} elevation={0} className={classes.root}>
@@ -106,6 +112,7 @@ function MovieList() {
                         );
                     })
                     :
+                    // IF no search, display full array of movies
                     movies.map(movie => {
                         return (
                             <Card key={movie.id} elevation={0} className={classes.root}>
