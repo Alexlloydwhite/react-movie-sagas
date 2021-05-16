@@ -29,7 +29,6 @@ const AddMovieForm = () => {
     const [movieTitle, setMovieTitle] = useState('');
     const [movieUrl, setMovieUrl] = useState('');
     const [movieDescription, setMovieDescription] = useState('');
-    const [genre, setGenre] = useState('');
     const [genreId, setGenreId] = useState(1);
 
     const dispatch = useDispatch();
@@ -46,7 +45,7 @@ const AddMovieForm = () => {
         setMovieTitle('');
         setMovieUrl('');
         setMovieDescription('');
-        setGenreId(1);
+        setGenreId('');
     }
 
     useEffect(() => {
@@ -71,6 +70,7 @@ const AddMovieForm = () => {
                     form="movieform"
                     onChange={(e) => setGenreId(e.target.value)}
                     fullWidth
+                    value={genreId}
                 >
                     {/* maps over array of genres, displays each as an option! */}
                     {genres.map(genre => {
