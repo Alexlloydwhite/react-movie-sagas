@@ -1,5 +1,6 @@
 // IMPORTS FOR REACT FRAMEWORKS!
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 // -------------------- MUI -----------------------
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
@@ -21,10 +22,13 @@ const useStyles = makeStyles({
 
 const Search = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [search, setSearch] = useState('');
 
     const handleSearch = (e) => {
         console.log('IN handleSearch - Search for:', e.target.value);
+        setSearch(e.target.value)
+        dispatch({ type: 'SET_SEARCH', search: e.target.value });
     }
 
     return (
