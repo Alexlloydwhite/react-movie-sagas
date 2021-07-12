@@ -13,8 +13,7 @@ I began the project with a database of movies. I displayed each movie poster on 
 
 My favorite part of this application is that has the ability to scale while retaining all base functionality. 
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
-^^ COMING SOON! ^^
+[Deployed version of app](https://vast-taiga-46649.herokuapp.com/). Please note that this is hosted on Heroku and will take a couple of minutes to "warm up".
 
 ## Screen Shot
 Main View
